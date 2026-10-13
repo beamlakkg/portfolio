@@ -1,150 +1,87 @@
-import React, { useEffect, useRef } from 'react';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
-import  ProfileImg from '../assets/45.png';
+import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import TechMarks from '../components/TechMarks';
 
-const Home: React.FC = () => {
-  const typingRef = useRef<HTMLSpanElement>(null);
-  
-  useEffect(() => {
-    const roles = ['Software Engineer', 'Front-end Developer', 'UI/UX Enthusiast', 'Problem Solver'];
-    let currentRoleIndex = 0;
-    let currentCharIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
-    
-    const type = () => {
-      const currentRole = roles[currentRoleIndex];
-      
-      if (isDeleting) {
-        if (typingRef.current) {
-          typingRef.current.textContent = currentRole.substring(0, currentCharIndex - 1);
-        }
-        currentCharIndex--;
-        typingSpeed = 50;
-      } else {
-        if (typingRef.current) {
-          typingRef.current.textContent = currentRole.substring(0, currentCharIndex + 1);
-        }
-        currentCharIndex++;
-        typingSpeed = 100;
-      }
-      
-      if (!isDeleting && currentCharIndex === currentRole.length) {
-        isDeleting = true;
-        typingSpeed = 1500; // Pause at the end
-      } else if (isDeleting && currentCharIndex === 0) {
-        isDeleting = false;
-        currentRoleIndex = (currentRoleIndex + 1) % roles.length;
-        typingSpeed = 500; // Pause before typing next word
-      }
-      
-      setTimeout(type, typingSpeed);
-    };
-    
-    const typingTimeout = setTimeout(type, 1000);
-    
-    return () => clearTimeout(typingTimeout);
-  }, []);
+const Home = () => {
+  const reduceMotion = useReducedMotion();
 
-  const scrollToAbout = () => {
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const socialLinks = [
+    { icon: Github, url: 'https://github.com/beamlakkg', label: 'GitHub' },
+    { icon: Linkedin, url: 'https://www.linkedin.com/in/beamlak-kagnew-48994b297', label: 'LinkedIn' },
+    { icon: Mail, url: 'mailto:beamlakkg@gmail.com', label: 'Email' },
+  ];
 
   return (
-    <section id="home" className="min-h-screen flex flex-col justify-center relative pt-20">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-          <div className="lg:col-span-3 space-y-6">
-            <div className="space-y-2 animate-fadeIn">
-              <h2 className="text-xl md:text-2xl text-gray-600 dark:text-gray-400">Hello, I'm</h2>
-              <h1 className="text-4xl md:text-6xl font-bold">
-                Beamlak Kagnew
-              </h1>
-              <div className="text-2xl md:text-3xl text-blue-600 dark:text-blue-400 h-12 flex items-center">
-                I'm a <span ref={typingRef} className="ml-2 font-medium"></span>
-                <span className="animate-blink ml-1">|</span>
-              </div>
-            </div>
-            
-            <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl animate-fadeIn animation-delay-100">
-              I build exceptional and accessible digital experiences for the web and mobile. 
-              Focused on creating elegant solutions to complex problems with clean, 
-              efficient code and user-friendly interfaces.
+    <section id="home" className="relative flex min-h-screen flex-col justify-center overflow-hidden pt-24 pb-16">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          className="space-y-7"
+        >
+          <p className="text-sm font-medium tracking-[0.18em] text-cyan-700 uppercase dark:text-cyan-300">
+            Software engineering graduate
+          </p>
+          <div className="space-y-4">
+            <h1 className="text-5xl font-semibold tracking-tight text-zinc-950 sm:text-6xl lg:text-7xl dark:text-white">
+              Beamlak Kagnew
+            </h1>
+            <p className="max-w-xl text-2xl font-medium tracking-tight text-zinc-800 sm:text-3xl dark:text-zinc-100">
+              Frontend developer and UI/UX designer.
             </p>
-            
-            <div className="flex flex-wrap gap-4 animate-fadeIn animation-delay-200">
-              <a 
-                href="#contact" 
-                className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors shadow-md"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Get in Touch
-              </a>
-              
-              <a 
-                href="#projects" 
-                className="px-6 py-3 border border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 rounded-md hover:bg-blue-600 hover:bg-opacity-10 transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                View Work
-              </a>
-            </div>
-            
-            <div className="flex space-x-5 pt-4 animate-fadeIn animation-delay-300">
+          </div>
+          <p className="max-w-xl text-lg leading-8 text-zinc-600 dark:text-zinc-300">
+            I design the flow, then build it. The recent work is EthioMaterial, including a mobile app with my team, insurance tools at Birrama, and the WegoAddis Tour website.
+          </p>
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <a
+              href="#projects"
+              onClick={(event) => {
+                event.preventDefault();
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center gap-2 rounded-full bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 dark:bg-white dark:text-zinc-950"
+            >
+              View the work
+              <ArrowUpRight size={16} />
+            </a>
+            {socialLinks.map(({ icon: Icon, url, label }) => (
               <a
-                href="https://github.com/beamlakkg"
+                key={label}
+                href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                aria-label="GitHub"
+                aria-label={label}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-zinc-300 text-zinc-700 transition-colors hover:border-zinc-950 hover:text-zinc-950 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-white dark:hover:text-white"
               >
-                <Github size={24} />
+                <Icon size={18} />
               </a>
-              <a
-                href="https://www.linkedin.com/in/beamlak-kagnew-48994b297"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={24} />
-              </a>
-              <a
-                href="mailto:beamlakkg@gmail.com"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                aria-label="Email"
-              >
-                <Mail size={24} />
-              </a>
-            </div>
+            ))}
           </div>
-          
-          <div className="lg:col-span-2 animate-fadeIn animation-delay-400">
-              <img 
-                src= { ProfileImg}
-                alt="Beamlak Kagnew" 
-                className="w-full h-full object-cover "
-              />
-          </div>
-        </div>
+        </motion.div>
+
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.08 }}
+        >
+          <p className="mb-3 text-sm font-medium text-zinc-500 dark:text-zinc-400">Tools and frameworks</p>
+          <TechMarks />
+        </motion.div>
       </div>
-      
-      <button
-        onClick={scrollToAbout}
-        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-blue-600 dark:text-blue-400 animate-bounce"
-        aria-label="Scroll down"
+
+      <motion.button
+        type="button"
+        initial={reduceMotion ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-zinc-400 transition-colors hover:text-zinc-950 dark:hover:text-white"
+        aria-label="Scroll to about"
       >
-        <ArrowDown size={32} />
-      </button>
+        <ArrowDown size={22} />
+      </motion.button>
     </section>
   );
 };

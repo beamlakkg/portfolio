@@ -8,7 +8,6 @@ const Contact: React.FC = () => {
     subject: '',
     message: '',
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     success: boolean;
     message: string;
@@ -21,46 +20,30 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus({
-        success: true,
-        message: 'Your message has been sent successfully. I will get back to you soon!',
-      });
-      
-      // Clear form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
-      
-      // Clear status after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, 5000);
-    }, 1500);
+    const subject = encodeURIComponent(formData.subject);
+    const body = encodeURIComponent(`${formData.message}\n\n— ${formData.name}\n${formData.email}`);
+    window.location.href = `mailto:beamlakkg@gmail.com?subject=${subject}&body=${body}`;
+    setSubmitStatus({
+      success: true,
+      message: 'Your email app should open with this message. If it does not, write directly to beamlakkg@gmail.com.',
+    });
   };
 
   return (
-    <section id="contact" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="relative overflow-hidden py-20 sm:py-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.1),_transparent_40%)]" />
+      <div className="relative container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
-          <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Have a project in mind or want to discuss a potential collaboration?
-            I'm always open to new opportunities!
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-600 dark:text-cyan-400">Contact</p>
+          <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-4">Get in touch</h2>
+          <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg">
+            Software engineering graduate. If you have a product or a role in mind, write to me.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 mb-8">
+            <div className="mb-8 rounded-[28px] border border-white/20 bg-white/70 p-8 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-900/60">
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               
               <div className="space-y-6">
@@ -84,7 +67,7 @@ const Contact: React.FC = () => {
                   <div>
                     <h4 className="font-medium mb-1">Email</h4>
                     <a 
-                      href="mailto:john.doe@example.com" 
+                      href="mailto:beamlakkg@gmail.com" 
                       className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     >
                       beamlakkg@gmail.com
@@ -122,8 +105,8 @@ const Contact: React.FC = () => {
               </div>
             </div>
             
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
-              <h3 className="text-2xl font-bold mb-6">Follow Me</h3>
+            <div className="rounded-[28px] border border-white/20 bg-white/70 p-8 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-900/60">
+              <h3 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">Follow Me</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 Connect with me on social media or check out my code repositories.
               </p>
@@ -166,8 +149,8 @@ const Contact: React.FC = () => {
             </div>
           </div>
           
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
-            <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
+          <div className="rounded-[28px] border border-white/20 bg-white/70 p-8 shadow-[0_18px_40px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:border-slate-700/60 dark:bg-slate-900/60">
+            <h3 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">Send Me a Message</h3>
             
             {submitStatus && (
               <div 
@@ -192,7 +175,7 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full rounded-2xl border border-slate-200 bg-white/80 px-4 py-2.5 text-slate-800 outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
                     placeholder="Beamlak Kagnew"
                   />
                 </div>
@@ -208,7 +191,7 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full rounded-2xl border border-slate-200 bg-white/80 px-4 py-2.5 text-slate-800 outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
                     placeholder="beamlakkg@example.com"
                   />
                 </div>
@@ -224,7 +207,7 @@ const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-2xl border border-slate-200 bg-white/80 px-4 py-2.5 text-slate-800 outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
                 >
                   <option value="">Select a subject</option>
                   <option value="Job Opportunity">Job Opportunity</option>
@@ -245,25 +228,17 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-2xl border border-slate-200 bg-white/80 px-4 py-2.5 text-slate-800 outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
                   placeholder="Hello, I'd like to talk about..."
                 />
               </div>
               
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-70 flex items-center justify-center"
+                className="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-cyan-600 dark:bg-white dark:text-slate-900 dark:hover:bg-cyan-300"
               >
-                {isSubmitting ? (
-                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                ) : (
-                  <Send size={18} className="mr-2" />
-                )}
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                <Send size={18} className="mr-2" />
+                Send Message
               </button>
             </form>
           </div>
