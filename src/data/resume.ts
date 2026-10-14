@@ -45,10 +45,10 @@ export interface Achievement {
 export const professionalExperience: ProfessionalExperience[] = [
   {
     id: 1,
-    role: 'Frontend Developer, UI/UX Designer & Systems Integration',
+    role: 'Frontend Developer & UI/UX Designer',
     company: 'Meson Technologies',
-    startDate: '2025',
-    endDate: '2026',
+    startDate: '2026',
+    endDate: 'Present',
     location: 'Addis Ababa, Ethiopia',
     description:
       'Designed and built EthioMaterial, a construction materials marketplace developed with support associated with Ethio Alliance and the French Embassy.',
@@ -57,14 +57,14 @@ export const professionalExperience: ProfessionalExperience[] = [
       'Built responsive React and TypeScript screens for buyers, suppliers, and administrators',
       'Integrated the frontend with REST APIs for listings, search, and role-specific workflows',
     ],
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Redux Toolkit', 'Figma', 'Axios'],
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Redux Toolkit', 'Figma', 'Axios', 'React Native'],
   },
   {
     id: 2,
     role: 'Frontend Developer',
     company: 'Birrama Technologies',
-    startDate: '2025',
-    endDate: '2026',
+    startDate: '2026',
+    endDate: 'Present',
     location: 'Addis Ababa, Ethiopia',
     description:
       'Developed the administrative frontend for MedhinLink and the Agent Management System, covering insurance operations from policies and claims to agent records.',
@@ -79,8 +79,8 @@ export const professionalExperience: ProfessionalExperience[] = [
     id: 3,
     role: 'Full-Stack Developer — Freelance',
     company: 'WegoAddis Tour',
-    startDate: '2025',
-    endDate: '2025',
+    startDate: '2026',
+    endDate: '2026',
     location: 'Addis Ababa, Ethiopia',
     description:
       'Turned the tourism design into a deployed website for destinations, tour details, inquiries, and content management.',
@@ -91,54 +91,38 @@ export const professionalExperience: ProfessionalExperience[] = [
     ],
     technologies: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Figma'],
   },
-  {
-    id: 4,
-    role: 'Frontend Developer & UI/UX Designer',
-    company: 'MOHA Soft Drinks',
-    startDate: '2025',
-    endDate: '2026',
-    location: 'Addis Ababa, Ethiopia',
-    description:
-      'Designed and developed internal maintenance, inventory, and reporting interfaces for headquarters and multiple branches, and maintained the public website.',
-    achievements: [
-      'Designed internal flows for maintenance, inventory, and reporting',
-      'Built React interfaces and connected them to available APIs',
-      'Updated the existing company website and fixed responsive issues',
-    ],
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Figma', 'REST APIs'],
-  },
 ];
 
 export const internships: Internship[] = [
   {
     id: 1,
     role: 'Frontend Developer Intern',
-    company: 'Kuraz',
+    company: 'Kuraz Tech',
     startDate: 'June 2024',
     endDate: 'September 2024',
     description:
-      'Built React components for the Kuraz internship program, including apply and sign-in entry points, and connected interfaces to REST APIs.',
+      'Built React components for the Kuraz internship program, including apply and sign-in entry points, and connected interfaces to REST APIs also entrepreneur and investor connector platform.',
     technologies: ['React', 'JavaScript', 'Tailwind CSS', 'Axios'],
   },
   {
     id: 2,
     role: 'Software Developer Intern',
-    company: 'Fullstack Technologies',
+    company: 'EfuyeGela',
     startDate: 'During studies',
     endDate: 'Completed',
     description:
-      'Contributed to an internship management web application for listings, applications, student records, and status tracking.',
-    technologies: ['Web interfaces', 'Forms', 'Administrative workflows'],
+      'Contributed to the development of a social Community Platform for families and friends to connect and share memories.',
+    technologies: ['prisma', 'next.js', 'tailwind css', 'typescript', 'nextjs', 'shadcn/ui'],
   },
   {
     id: 3,
-    role: 'Frontend Developer Intern',
-    company: 'Qlass / Classic Technology',
-    startDate: 'During studies',
-    endDate: 'Completed',
+    role: 'Software Developer Intern',
+    company: 'MOHA Soft Drinks',
+    startDate: '2025',
+    endDate: '2025',
     description:
-      'Developed frontend components, page layouts, and responsive screens from team requirements and review.',
-    technologies: ['Frontend UI', 'Responsive layouts', 'Reusable components'],
+      'Designed and developed internal maintenance, inventory, and reporting interfaces for headquarters and multiple branches, and maintained the public website.',
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Figma', 'REST APIs'],
   },
 ];
 
@@ -169,7 +153,18 @@ export const education: Education[] = [
   },
   {
     id: 3,
-    degree: 'Frontend Web Development Bootcamp (React)',
+    degree: 'Cybersecurity',
+    institution: 'ALX',
+    startDate: '2026',
+    endDate: '2026',
+    location: 'Addis Ababa, Ethiopia',
+    description:
+      'Cybersecurity at alx, for 3 month intensive training on cybersecurity. ',
+    focusAreas: ['Cybersecurity', 'Network Security', 'Web Security', 'Cybersecurity Tools'],
+  },
+  {
+    id: 4,
+    degree: 'Frontend Web Development (React)',
     institution: 'Google Developers Club',
     startDate: '2024',
     endDate: '2024',

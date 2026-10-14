@@ -21,7 +21,7 @@ const Home = () => {
           className="space-y-7"
         >
           <p className="text-sm font-medium tracking-[0.18em] text-cyan-700 uppercase dark:text-cyan-300">
-            Software engineering graduate
+            Software Engineer
           </p>
           <div className="space-y-4">
             <h1 className="text-5xl font-semibold tracking-tight text-zinc-950 sm:text-6xl lg:text-7xl dark:text-white">
